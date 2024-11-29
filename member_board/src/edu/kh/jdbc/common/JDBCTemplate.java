@@ -3,6 +3,8 @@ package edu.kh.jdbc.common;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
@@ -20,7 +22,6 @@ public class JDBCTemplate {
 	 */
 	
 	private static Connection conn;
-	private static Statement stat;
 	
 	public static Connection getConnection() {
 		// 공용으로 사용되는 conn에 커넥션이 없거나 이전 커넥션이 있었으나 닫힌 경우에만 새로 연결
@@ -48,6 +49,58 @@ public class JDBCTemplate {
 		
 		return conn;
 	}
+	
+	// close() 작성
+	
+	public static void close(Connection conn) {
+		try {
+			if (conn != null && !conn.isClosed()) conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(Statement stat) {
+		try {
+			if (stat != null && !stat.isClosed()) stat.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(ResultSet rs) {
+		try {
+			if (rs != null && !rs.isClosed()) rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 트랜잭션 제어
+	
+	// commit
+	public static void commit(Connection conn) {
+		try {
+			if (conn != null && !conn.isClosed()) conn.commit();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void rollback(Connection conn) {
+		try {
+			if (conn != null && !conn.isClosed()) conn.rollback();			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
