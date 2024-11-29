@@ -4,6 +4,14 @@
 <!-- 마크업 언어 주석 Ctrl + Shift + / -->
 
 <properties>
-	<!-- connent : properties XML 파일 설명 -->
+	<!-- comment : properties XML 파일 설명 -->
 	<comment>DB Connection Data</comment>
+	
+	<!-- entry : Map의 K,V 묶어서 부르는 명칭 -->
+	
+	<entry key="driver">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="url">jdbc:oracle:thin:@localhost:1521:XE</entry>
+	<entry key="user">member_pcs</entry>
+	<entry key="password">member1234</entry>
+	
 </properties>
