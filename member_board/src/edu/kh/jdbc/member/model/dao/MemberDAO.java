@@ -1,10 +1,6 @@
 package edu.kh.jdbc.member.model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import edu.kh.jdbc.member.dto.Member;
 
@@ -77,4 +73,34 @@ public class MemberDAO {
 		return result;
 	}
 
+	public Member signIn(Connection conn, String memberId) throws SQLException {
+		Member result = null;
+
+		try {
+			String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()){
+				result = new Member(
+						rs.getInt(1),
+						rs.getString(2),
+						rs.getString(3),
+						rs.getString(4),
+						rs.getString(5).charAt(0),
+						rs.getDate(6),
+						rs.getString(7).charAt(0)
+						);
+			}
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+
+		return result;
+
+
+	}
 }

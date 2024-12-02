@@ -91,4 +91,30 @@ public class MemberView {
 		
 	}
 
+	public Member signIn() {
+		System.out.println("[로그인]");
+
+		try {
+			System.out.print("아이디 : ");
+			String memberId = sc.next();
+
+			Member result = service.idCheck(memberId);
+			if (result == null) {
+				System.out.println("존재하지 않는 아이디 입니다.");
+				return null;
+			} else {
+				System.out.print("비밀번호 : ");
+				String memberPw = sc.next();
+				if (memberPw.equals(result.getMemberPw())) {
+					return result;
+				} else {
+					return null;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			signIn();
+		}
+        return null;
+    }
 }

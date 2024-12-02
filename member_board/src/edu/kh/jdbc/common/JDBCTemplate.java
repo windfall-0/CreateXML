@@ -29,7 +29,7 @@ public class JDBCTemplate {
 		try {
 			if (conn == null || conn.isClosed()) {
 				Properties prop = new Properties();
-				prop.loadFromXML(new FileInputStream("driver.xml"));
+				prop.loadFromXML(new FileInputStream("member_board/driver.xml"));
 				
 				String driver = prop.getProperty("driver");
 				String url = prop.getProperty("url");

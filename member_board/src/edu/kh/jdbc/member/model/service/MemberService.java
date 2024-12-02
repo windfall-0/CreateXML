@@ -58,6 +58,12 @@ public class MemberService {
 	}
 
 
+	public Member idCheck(String memberId) throws SQLException {
+		Connection conn = getConnection();
 
+		Member result = dao.signIn(conn, memberId);
+		close(conn);
+		return result;
 
+	}
 }
